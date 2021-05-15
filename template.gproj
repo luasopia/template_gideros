@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+ <properties mouseTouchOrder="0" macos_category="5" app_name="" mainluaOnly="1" osx_installerId="" version_code="1" windowWidth="0" vsync="0" windowHeight="0" winrt_package="com.yourdomain.yourapp" encryptCode="0" retinaDisplay="0" backgroundColor="#ffffff" autorotation="0" splashScaleMode="0" html5_host="" fps="60" osx_category="5" logicalWidth="1080" splash_h_image="" html5_wasm="0" html5_pack="0" app_icon="" ios_bundle="com.yourdomain." architecture="0" logicalHeight="1920" html5_crash="" splash_v_image="" win_org="GiderosMobile" touchToMouse="1" html5_symbols="0" encryptAssets="0" iosDevice="0" html5_mem="256" html5_fbinstant="0" orientation="0" atv_bundle="com.yourdomain.yourapp-atv" osx_bundle="com.yourdomain." disableSplash="0" tv_icon="" osx_signingId="" osx_org="GiderosMobile" winrt_org="GiderosMobile" scaleMode="3" osx_domain="giderosmobile.com" html5_fbload="100" exportMode="0" macos_bundle="com.yourdomain.yourapp-macos" win_domain="giderosmobile.com" mouseToTouch="1" build_number="1" version="1.0">
+  <imageScales/>
+  <plugins/>
+  <exports>
+   <export name="APK">
+    <property value="" name="androidPath"/>
+    <property value="" name="androidSdk"/>
+    <property value="26" name="androidTarget"/>
+    <property value="" name="androidTools"/>
+    <property value="0" name="buildAab"/>
+    <property value="1" name="buildApk"/>
+    <property value="0" name="deployApk"/>
+    <property value="" name="javaPath"/>
+    <property value="" name="keyAlias"/>
+    <property value="C:/Users/sales/OneDrive - ??????????/_coding/game001.keystore" name="keyStore"/>
+    <property value="com.yourdomain.yourapp" name="packageName"/>
+    <property value="0" name="timestampApk"/>
+   </export>
+  </exports>
+ </properties>
+ <folder name="AndroidResources">
+  <folder name="res">
+   <folder name="mipmap-anydpi-v26">
+    <file name="assets/AndroidResources/res/mipmap-anydpi-v26/ic_launcher.xml"/>
+   </folder>
+   <folder name="mipmap-hdpi">
+    <file name="assets/AndroidResources/res/mipmap-hdpi/ic_launcher.png"/>
+    <file name="assets/AndroidResources/res/mipmap-hdpi/ic_launcher_foreground.png"/>
+   </folder>
+   <folder name="mipmap-mdpi">
+    <file name="assets/AndroidResources/res/mipmap-mdpi/ic_launcher.png"/>
+    <file name="assets/AndroidResources/res/mipmap-mdpi/ic_launcher_foreground.png"/>
+   </folder>
+   <folder name="mipmap-xhdpi">
+    <file name="assets/AndroidResources/res/mipmap-xhdpi/ic_launcher.png"/>
+    <file name="assets/AndroidResources/res/mipmap-xhdpi/ic_launcher_foreground.png"/>
+   </folder>
+   <folder name="mipmap-xxhdpi">
+    <file name="assets/AndroidResources/res/mipmap-xxhdpi/ic_launcher.png"/>
+    <file name="assets/AndroidResources/res/mipmap-xxhdpi/ic_launcher_foreground.png"/>
+   </folder>
+   <folder name="mipmap-xxxhdpi">
+    <file name="assets/AndroidResources/res/mipmap-xxxhdpi/ic_launcher.png"/>
+    <file name="assets/AndroidResources/res/mipmap-xxxhdpi/ic_launcher_foreground.png"/>
+   </folder>
+   <folder name="values">
+    <file name="assets/AndroidResources/res/values/values.xml"/>
+   </folder>
+  </folder>
+ </folder>
+ <folder name="Images.xcassets">
+  <folder name="AppIcon.appiconset">
+   <file name="assets/Images.xcassets/AppIcon.appiconset/Contents.json"/>
+   <file name="assets/Images.xcassets/AppIcon.appiconset/Icon-1024.png"/>
+   <file name="assets/Images.xcassets/AppIcon.appiconset/Icon-120.png"/>
+   <file name="assets/Images.xcassets/AppIcon.appiconset/Icon-152.png"/>
+   <file name="assets/Images.xcassets/AppIcon.appiconset/Icon-167.png"/>
+   <file name="assets/Images.xcassets/AppIcon.appiconset/Icon-180.png"/>
+   <file name="assets/Images.xcassets/AppIcon.appiconset/Icon-40.png"/>
+   <file name="assets/Images.xcassets/AppIcon.appiconset/Icon-58.png"/>
+   <file name="assets/Images.xcassets/AppIcon.appiconset/Icon-76.png"/>
+   <file name="assets/Images.xcassets/AppIcon.appiconset/Icon-80.png"/>
+   <file name="assets/Images.xcassets/AppIcon.appiconset/Icon-87.png"/>
+  </folder>
+  <file name="assets/Images.xcassets/Contents.json"/>
+ </folder>
+ <folder name="LaunchScreen.storyboardc">
+  <file name="assets/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib"/>
+  <file name="assets/LaunchScreen.storyboardc/Info.plist"/>
+  <file name="assets/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib"/>
+  <file name="assets/LaunchScreen.storyboardc/designable.storyboard"/>
+ </folder>
+ <folder name="luasopia">
+  <folder name="core">
+   <file name="assets/luasopia/core/a01_class.lua"/>
+   <file name="assets/luasopia/core/a02_timer.lua"/>
+   <file name="assets/luasopia/core/a03_util.lua"/>
+   <file name="assets/luasopia/core/a04_color.lua"/>
+   <file name="assets/luasopia/core/b01_disp.lua"/>
+   <file name="assets/luasopia/core/b02_disp_move.lua"/>
+   <file name="assets/luasopia/core/b03_disp_shift.lua"/>
+   <file name="assets/luasopia/core/b04_disp_touch.lua"/>
+   <file name="assets/luasopia/core/b05_disp_tap.lua"/>
+   <file name="assets/luasopia/core/b06_disp_blink.lua"/>
+   <file name="assets/luasopia/core/b07_disp_path.lua"/>
+   <file name="assets/luasopia/core/b08_disp_fllw.lua"/>
+   <file name="assets/luasopia/core/b09_disp_wave.lua"/>
+   <file name="assets/luasopia/core/b10_disp_coll.lua"/>
+   <file name="assets/luasopia/core/c01_group.lua"/>
+   <file name="assets/luasopia/core/c02_image.lua"/>
+   <file name="assets/luasopia/core/c03_image_region.lua"/>
+   <file name="assets/luasopia/core/c04_getsheet.lua"/>
+   <file name="assets/luasopia/core/c05_sprite.lua"/>
+   <file name="assets/luasopia/core/d01_text.lua"/>
+   <file name="assets/luasopia/core/d02_logf.lua"/>
+   <file name="assets/luasopia/core/e01_getshape.lua"/>
+   <file name="assets/luasopia/core/e02_shape.lua"/>
+   <file name="assets/luasopia/core/e03_rect.lua"/>
+   <file name="assets/luasopia/core/e04_polygon.lua"/>
+   <file name="assets/luasopia/core/e05_circle.lua"/>
+   <file name="assets/luasopia/core/e06_star.lua"/>
+   <file name="assets/luasopia/core/e07_heart.lua"/>
+   <file name="assets/luasopia/core/e08_square.lua"/>
+   <file name="assets/luasopia/core/e30_line.lua"/>
+   <file name="assets/luasopia/core/f01_sound.lua"/>
+   <file name="assets/luasopia/core/g01_scene.lua"/>
+   <file name="assets/luasopia/core/z01_enterframe.lua"/>
+  </folder>
+  <folder name="lib">
+   <file name="assets/luasopia/lib/Ani.lua"/>
+   <file name="assets/luasopia/lib/Path.lua"/>
+   <file name="assets/luasopia/lib/Tail.lua"/>
+   <file name="assets/luasopia/lib/maketile.lua"/>
+  </folder>
+  <folder name="ttf">
+   <file name="assets/luasopia/ttf/cabin.ttf"/>
+   <file name="assets/luasopia/ttf/cruft.ttf"/>
+   <file name="assets/luasopia/ttf/opensans.ttf"/>
+   <file name="assets/luasopia/ttf/typed.ttf"/>
+  </folder>
+  <folder name="widget">
+   <file name="assets/luasopia/widget/button.lua"/>
+   <file name="assets/luasopia/widget/progressbar.lua"/>
+  </folder>
+  <file name="assets/luasopia/init.lua"/>
+ </folder>
+ <folder name="main">
+  <folder name="ex">
+   <file name="assets/main/ex/bird.png"/>
+   <file name="assets/main/ex/exmain.lua"/>
+   <file name="assets/main/ex/gear.png"/>
+   <file name="assets/main/ex/moon.png"/>
+  </folder>
+  <folder name="lib">
+   <folder name="lib">
+    <file name="assets/main/lib/lib/lib.lua"/>
+    <file name="assets/main/lib/lib/runw.png"/>
+   </folder>
+   <file name="assets/main/lib/lib1.lua"/>
+  </folder>
+  <file name="assets/main/main.lua"/>
+ </folder>
+ <file name="assets/.gitignore"/>
+ <file name="assets/Icon.png"/>
+ <file name="assets/build.settings"/>
+ <file name="assets/config.lua"/>
+ <file name="assets/main.lua"/>
+</project>
