@@ -1,4 +1,4 @@
 --setdebug{grid=true}
-printf('hello luasopia')
 
-return require 'ex.exmain'
+local h = Heart(100):wavescale()
+printf('hello luasopia')

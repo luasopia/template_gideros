@@ -84,6 +84,7 @@ $RECYCLE.BIN/
 *.lnk
 
 # added by salesiopark (2021/05/15) to exclude folders
+assets/.tmp/
 assets/.git_/
 assets/AndroidResources/
 assets/Images.xcassets/
