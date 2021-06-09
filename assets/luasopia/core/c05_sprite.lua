@@ -2,7 +2,7 @@ local int = math.floor
 local tIn = table.insert
 local timeGapFrame = 1000/_luasopia.fps
 local Disp = Display
-local DispUpd = Disp.__upd
+local DispUpd = Disp.__upd__
 --[[---------------------------------------------------------------------------
 -- local spr = Sprite(sheet, seq)
 -- local sheet = makeSheet(url, frameWidth, frameHeight, numFrames)
@@ -104,13 +104,19 @@ if _Gideros then
         self.__sq = modseq(seq, sht.__frames)
 
         self:seq(1) -- set 'default'(id==1) sequence
+        
+        -- 2021/05/28 added for Display:ishit() method
+        local w, h = sht._w, sht._h
+        local hw, hh = w/2, h/2
+        self.__cpg = {-hw,-hh,1/h,  hw,-hh,1/w,  hw,hh,1/h,  -hw,hh,1/w}
+
         return Disp.init(self)
     end
 
     -- 2020/03/01 self.__play 와 self.__playEnd 를 구분한다.
     -- self.__playEnd는 seq에서 지정된 플레이(횟수)가 끝난 것이고
     -- self.__play == false 는 pause()함수가 호출된 경우임
-    function Sprite:__upd()
+    function Sprite:__upd__()
         if self.__play and not self.__playEnd then
             self.__tmPlay = self.__tmPlay + timeGapFrame
             local playFrameCount = int(self.__tmPlay/self.__timePerFrame)
@@ -236,6 +242,12 @@ elseif _Corona then
         self.__bd = newS(sht.sheet, self.__sq)
         
         self:seq(self)
+
+        -- 2021/05/28 added for Display:ishit() method
+        local w, h = sht._w, sht._h
+        local hw, hh = w/2, h/2
+        self.__cpg = {-hw,-hh,1/h,  hw,-hh,1/w,  hw,hh,1/h,  -hw,hh,1/w}
+        
         return Disp.init(self)
     end
 

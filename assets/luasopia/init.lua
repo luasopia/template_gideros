@@ -79,7 +79,7 @@ if gideros then -- in the case of using Gideros
         __bd = _Gideros.Sprite.new(),
         add = function(self, child) return self.__bd:addChild(child.__bd) end,
         --2020/03/15 isobj(_loglayer, Group)==true 이려면 아래 두 개 필요
-        --__clsid__ = Group.__id__,
+        --__clsid = Group.__id__,
 
         isvisible = function(self) return self.__bd:isVisible() end,
         hide = function(self) self.__bd:setVisible(false); return self end,
@@ -135,7 +135,7 @@ elseif coronabaselib then -- in the case of using CoronaSDK
         __bd = _Corona.display.newGroup(),
         add = function(self, child) return self.__bd:insert(child.__bd) end,
         --2020/03/15 isobj(_loglayer, Group)가 true가 되려면 아래 두 개 필요
-        --__clsid__ = Group.__id__
+        --__clsid = Group.__id__
         isvisible = function(self) return self.__bd.isVisible end,
         hide = function(self) self.__bd.isVisible = false; return self end,
         show = function(self) self.__bd.isVisible = true; return self end
@@ -184,7 +184,6 @@ require 'luasopia.core.c04_getsheet'
 require 'luasopia.core.c05_sprite'
 
 require 'luasopia.core.d01_text'
-require 'luasopia.core.e01_getshape'
 require 'luasopia.core.e02_shape'
 require 'luasopia.core.e30_line' -- required refactoring
 
@@ -199,6 +198,7 @@ require 'luasopia.shape.circle'
 require 'luasopia.shape.star'
 require 'luasopia.shape.heart'
 require 'luasopia.shape.square'
+require 'luasopia.shape.arrow'
 
 -------------------------------------------------------------------------------
 -- standard library
@@ -209,6 +209,7 @@ require 'luasopia.lib.02_shift'
 require 'luasopia.lib.04_blink' -- 2020/07/01, 2021/05/14 lib로 분리됨
 require 'luasopia.lib.05_wavescale' -- 2020/07/01, 2021/05/14 lib로 분리됨
 require 'luasopia.lib.06_ishit'
+require 'luasopia.lib.push'
 require 'luasopia.lib.path'
 require 'luasopia.lib.track' -- 2021/05/14 lib로 분리됨
 
@@ -220,6 +221,7 @@ require 'luasopia.lib.maketile' -- 2020/06/24 added
 
 require 'luasopia.widget.button'
 require 'luasopia.widget.progressbar'
+require 'luasopia.widget.alert'
 
 -------------------------------------------------------------------------------
 
@@ -228,10 +230,10 @@ local enterframedbg = require 'luasopia.core.z01_enterframe' -- 맨 마지막에
 
 
 
--- 2021/05/13 전역 printf()함수 정의
--- printf()함수를 한 번도 호출하지 않는다면 _luasopia.loglayer가 생성되지 않는다.
+-- 2021/05/13 전역 puts()함수 정의
+-- puts()함수를 한 번도 호출하지 않는다면 loglayer가 hide()로 유지된다
 
-function printf(str, ...)
+function puts(str, ...)
 
     if not _luasopia.loglayer:isvisible() then
         _luasopia.loglayer:show()
@@ -256,10 +258,10 @@ function setdebug(args)
     end
 
     -- 2020/05/30: added
-    printf("(content)width:%d, height:%d", _luasopia.width, _luasopia.height)
-    printf("(device)width:%d, height:%d", _luasopia.devicewidth, _luasopia.deviceheight)
-    printf("orientation:'%s', fps:%d", _luasopia.orientation, _luasopia.fps)
-    -- printf("endx:%d, endy:%d", screen.endx, screen.endy)
+    puts("(content)width:%d, height:%d", _luasopia.width, _luasopia.height)
+    puts("(device)width:%d, height:%d", _luasopia.devicewidth, _luasopia.deviceheight)
+    puts("orientation:'%s', fps:%d", _luasopia.orientation, _luasopia.fps)
+    -- puts("endx:%d, endy:%d", screen.endx, screen.endy)
     
     enterframedbg()
 

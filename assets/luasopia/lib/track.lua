@@ -1,7 +1,7 @@
 local Disp = Display
 local sqrt, atan2 = math.sqrt, math.atan2
 local _R2D = 180/math.pi -- radian to degree constant
-local dtobj = Disp._dtobj
+local tdobj = Disp.__tdobj
 --------------------------------------------------------------------------------
 
 local function upd(self)
@@ -39,15 +39,15 @@ function Disp:follow(target,opt) -- oncotact
     self._lspd = (opt.speed or 1)*20 -- 선속도 (따라가는 속도)
     self._rspd = opt.rotspeed or 0.9 -- 0.8<rs<1,(각속도) 작을수록 회전이 빠르다.
 
-    -- self:addupdate(upd)
-    self._iupds[upd] = upd
+    -- self:__addupd__(upd)
+    self.__iupds[upd] = upd
 end
 
 --------------------------------------------------------------------------------
 
 local function newtrgt(self)
     local trgt1 = nil
-    local trgts = dtobj[self._ttag] or {}
+    local trgts = tdobj[self._ttag] or {}
     for _, obj in pairs(trgts) do
         if trgt1 == nil then trgt1 = obj end -- 첫 번째 객체를 저장
         if obj._lckd == nil then
@@ -81,5 +81,5 @@ function Disp:followtag(name, opt) -- oncotact
     self._lspd = (opt.speed or 1)*20 -- 선속도
     self._rspd = opt.rotspeed or 0.9 -- 0.8<rs<1,(각속도) 작을수록 회전이 빠르다.
 
-    self:addupdate(updtag)
+    self:__addupd__(updtag)
 end

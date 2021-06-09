@@ -4,69 +4,56 @@
 --------------------------------------------------------------------------------
 Rect = class(Shape)
 --------------------------------------------------------------------------------
---[[
-local function mkpts(w, h, apx, apy)
-    local x1, y1 = w*-apx, h*-apy -- (x,y) of left-top
-    local x2, y2 = w*(1-apx), h*(1-apy) -- (x,y) of right-bottom
-    return {
-        x1, y1,
-        x2, y1,
-        x2, y2,
-        x1, y2,
-    }
-end
---]]
 
 -- 2020/02/23 : anchor위치에 따라 네 꼭지점의 좌표를 결정
+-- 2021/05/31 : 중심점이 원점인 사각형의 네 꼭지점 좌표 생성
 function Rect:__mkpts__()
 
-    local w,h,apx,apy = self.__w__, self.__h__, self._apx, self._apy
-    local x1, y1 = w*-apx, h*-apy -- (x,y) of left-top
-    local x2, y2 = w*(1-apx), h*(1-apy) -- (x,y) of right-bottom
+    local hw, hh = self.__wdt*0.5, self.__hgt*0.5
+    local x1, y1 = -hw, -hh -- left-top
+    local x2, y2 = hw, -hh -- right-top
+    local x3, y3 = hw, hh -- right-bottom
+    local x4, y4 = -hw, hh -- left-bottom
 
     -- 2021/05/08 : 충돌판정에 필요한 점의 정보 저장
     -- x,y,1/변의길이(단위벡터를 계산하는 데 필요함)
-    self.__cpg__ = {x1,y1,1/h,  x2, y1,1/w,  x2, y2,1/h,   x1,y2,1/w }
+    self.__cpg = {x1,y1,0.5/hh,  x2,y2,0.5/hw,  x3,y3,0.5/hh,   x4,y4,0.5/hw }
+    self.__sctx, self.__scty = 0, 0
+    self.__hwdt, self.__hhgt = hw, hh
 
-    return {x1, y1,  x2, y1,  x2, y2,  x1, y2 }
+    return {x1,y1,  x2,y2,  x3,y3,  x4,y4 }
 end
 
 function Rect:init(width, height, opt)
 
-    self.__w__, self.__h__ = width, height or width
-    self._apx, self._apy = 0.5, 0.5 -- AnchorPointX, AnchorPointY
-    --return Shape.init(self, mkpts(width, self.__h__, 0.5, 0.5), opt)
+    self.__wdt, self.__hgt = width, height or width
     return Shape.init(self, self:__mkpts__(), opt)
 
 end
 
--- 2020/02/23 : Gideros의 경우 anchor()함수는 오버라이딩해야 한다.
-function Rect:anchor(ax, ay)
-    self._apx, self._apy = ax, ay
-    --self:_re_pts1(mkpts(self.__w__, self.__h__, ax, ay))
-    self:_re_pts1(self:__mkpts__())
-    return self
-end
-
-function Rect:getanchor()
-    return self._apx, self._apy
-end
 
 --2020/06/23
 function Rect:setwidth(w)
-    self.__w__ = w
-    --return self:_re_pts1( mkpts(w, self.__h__, self._apx, self._apy) )
-    return self:_re_pts1(self:__mkpts__())
+
+    self.__wdt = w
+
+    self.__pts = self:__mkpts__()
+    return self:__redraw__()
+
 end
+
 
 function Rect:setheight(h)
-    self.__h__ = h
-    --return self:_re_pts1( mkpts(self.__w__, h, self._apx, self._apy) )
-    return self:_re_pts1( self:__mkpts__() )
+
+    self.__hgt = h
+
+    self.__pts = self:__mkpts__()
+    return self:__redraw__()
+
 end
 
-function Rect:getwidth() return self.__w__ end
-function Rect:getheight() return self.__h__ end
+function Rect:getwidth() return self.__wdt end
+function Rect:getheight() return self.__hgt end
 
 -- 2021/05/04: add aliases of set methods 
 Rect.width = Rect.setwidth
@@ -98,4 +85,28 @@ screen.deviceheight = ls.deviceheight
 screen.orientation = ls.orientation 
 -- added 2020/05/06
 screen.x0, screen.y0, screen.endx, screen.endy = x0, y0, endx, endy
---##############################################################################
+-------------------------------------------------------------------------------
+--2021/06/05 added
+--[[
+screen.console = {
+
+    clear = function() 
+
+    end,
+
+
+    function setlines(n)
+
+    end,
+
+
+    function hide()
+
+    end,
+
+
+    function show()
+
+    end,
+}
+--]]

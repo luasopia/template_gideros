@@ -4,14 +4,14 @@
 
 local tIn = table.insert
 local tRm = table.remove
-local tmgapf = 1000/_luasopia.fps
+local tmgapf = 1000/_luasopia.fps -- 1frame에 소요되는시간[ms]
 --------------------------------------------------------------------------------
 -- 2020/01/15 times that is NOT use intrinsic (Gideros/Corona) Timer class
 --
--- tmr = Timer(delay, func [,loops [,onend]])
+-- tmr = Timer(delay, fn [,loops [,onend]])
 --
--- 	After delay [ms], func (function) is called.
--- 	loops (default=1) designates the total number of calling func
+-- 	After delay (in milliseconds), fn (function) is called.
+-- 	loops (default=1) designates the total number of calling fn
 -- 	if loops is INF, then func is called infinitely with time gap of delay
 --
 -- 	arguments given to func call : event = {
@@ -26,8 +26,8 @@ local tmgapf = 1000/_luasopia.fps
 --------------------------------------------------------------------------------
 Timer = class()
 -- private static member variable
-Timer._tmrs = {}
-local timers = Timer._tmrs
+Timer.__tmrs = {}
+local timers = Timer.__tmrs
 -- local ntmrs = 0
 --------------------------------------------------------------------------------
 -- 타이머객체의 삭제는 이 함수안에서만 이루어지도록 해야 한다.(그래야 덜 꼬임)
@@ -58,8 +58,9 @@ function Timer.updateAll()
 				--if isfinal then
 				if isfinal and dobj.__bd ~=nil then
 					if tmr.__onend then
-						tmr.__onend(dobj, event) --dobj를 먼저 넘김
+					 	tmr.__onend(dobj, event) --dobj를 먼저 넘김
 					end
+										
 					dobj.__tmrs[tmr] = nil -- dobj안의 tmr객체도 삭제
 					timers[tmr] = nil
 					break
@@ -77,13 +78,14 @@ function Timer.updateAll()
 				end
 
 			end
+
 		end -- while  count > tmr.count do
 	end
 end
 ------------------------------------------------------------------------------------------
 function Timer.removeAll()
 	for _, tmr in pairs(timers) do
-		 tmr:remove()
+		tmr:remove()
 	end
 end
 
@@ -102,10 +104,10 @@ function Timer:init(delay, func, loops, onEnd)
 	-- local args = args or {}
 	self.delay = delay
 	self.loops = loops or 1
+	self.count = 0
 	self.__fn = func
 	self.__tm = 0
 	self.__onend = onEnd
-	self.count = 0
 	timers[self]=self
 end
 
@@ -118,12 +120,3 @@ function Timer:remove()
 	end
 	timers[self] = nil
 end
-
---[[
-function Timer:remove2()
-	if self.__dobj then -- display object에 붙어있는 타이머의 경우
-		self.__dobj.__tmrs[self] = nil -- dobj안의 tmr객체도 삭제
-	end
-	timers[self] = nil
-end
---]]

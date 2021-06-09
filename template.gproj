@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
- <properties winrt_package="com.yourdomain.yourapp" architecture="0" osx_installerId="" html5_symbols="0" windowHeight="0" html5_pack="0" app_name="" mainluaOnly="1" exportMode="0" encryptAssets="0" encryptCode="0" html5_wasm="0" windowWidth="0" macos_category="5" fps="60" win_org="GiderosMobile" html5_fbinstant="0" atv_bundle="com.yourdomain.yourapp-atv" osx_domain="giderosmobile.com" mouseTouchOrder="0" osx_signingId="" splashScaleMode="0" mouseToTouch="1" app_icon="" html5_crash="" osx_org="GiderosMobile" version="1.0" retinaDisplay="0" iosDevice="0" backgroundColor="#ffffff" orientation="0" vsync="0" splash_v_image="" ios_bundle="com.yourdomain." winrt_org="GiderosMobile" version_code="1" osx_bundle="com.yourdomain." logicalWidth="1080" tv_icon="" logicalHeight="1920" osx_category="5" touchToMouse="1" build_number="1" splash_h_image="" win_domain="giderosmobile.com" autorotation="0" macos_bundle="com.yourdomain.yourapp-macos" scaleMode="3" disableSplash="0" html5_host="" html5_mem="256" html5_fbload="100">
+ <properties osx_org="GiderosMobile" html5_fbinstant="0" encryptCode="0" winrt_package="com.yourdomain.yourapp" mouseTouchOrder="0" logicalHeight="1920" disableSplash="0" backgroundColor="#ffffff" splashScaleMode="0" orientation="0" html5_crash="" splash_h_image="" windowWidth="0" version="1.0" osx_category="5" autorotation="0" html5_pack="0" architecture="7" vsync="0" win_org="GiderosMobile" win_domain="giderosmobile.com" version_code="1" winrt_org="GiderosMobile" mainluaOnly="1" mouseToTouch="1" html5_symbols="0" osx_domain="giderosmobile.com" html5_wasm="0" tv_icon="" macos_bundle="com.yourdomain.yourapp-macos" logicalWidth="1080" app_icon="" ios_bundle="com.yourdomain." windowHeight="0" iosDevice="0" touchToMouse="1" fps="60" html5_mem="256" html5_host="" osx_signingId="" atv_bundle="com.yourdomain.yourapp-atv" html5_fbload="100" osx_bundle="com.yourdomain." retinaDisplay="0" app_name="" exportMode="0" build_number="1" macos_category="5" osx_installerId="" scaleMode="3" splash_v_image="" encryptAssets="0">
   <imageScales/>
   <plugins/>
   <exports>
    <export name="APK">
-    <property name="androidPath" value=""/>
-    <property name="androidSdk" value=""/>
-    <property name="androidTarget" value="26"/>
-    <property name="androidTools" value=""/>
-    <property name="buildAab" value="0"/>
-    <property name="buildApk" value="1"/>
-    <property name="deployApk" value="0"/>
-    <property name="javaPath" value=""/>
-    <property name="keyAlias" value=""/>
-    <property name="keyStore" value="C:/Users/sales/OneDrive - ??????????/_coding/game001.keystore"/>
-    <property name="packageName" value="com.yourdomain.yourapp"/>
-    <property name="timestampApk" value="0"/>
+    <property value="" name="androidPath"/>
+    <property value="" name="androidSdk"/>
+    <property value="26" name="androidTarget"/>
+    <property value="" name="androidTools"/>
+    <property value="0" name="buildAab"/>
+    <property value="1" name="buildApk"/>
+    <property value="0" name="deployApk"/>
+    <property value="" name="javaPath"/>
+    <property value="" name="keyAlias"/>
+    <property value="C:/Users/sales/OneDrive - ??????????/_coding/game001.keystore" name="keyStore"/>
+    <property value="com.yourdomain.yourapp" name="packageName"/>
+    <property value="0" name="timestampApk"/>
    </export>
   </exports>
  </properties>
@@ -87,11 +87,12 @@
    <file name="assets/luasopia/core/c04_getsheet.lua"/>
    <file name="assets/luasopia/core/c05_sprite.lua"/>
    <file name="assets/luasopia/core/d01_text.lua"/>
-   <file name="assets/luasopia/core/e01_getshape.lua"/>
+   <file name="assets/luasopia/core/d01_text0.lua"/>
    <file name="assets/luasopia/core/e02_shape.lua"/>
    <file name="assets/luasopia/core/e30_line.lua"/>
    <file name="assets/luasopia/core/f01_sound.lua"/>
    <file name="assets/luasopia/core/g01_scene.lua"/>
+   <file name="assets/luasopia/core/note.txt"/>
    <file name="assets/luasopia/core/z01_enterframe.lua"/>
   </folder>
   <folder name="lib">
@@ -100,14 +101,16 @@
    <file name="assets/luasopia/lib/03_logf.lua"/>
    <file name="assets/luasopia/lib/04_blink.lua"/>
    <file name="assets/luasopia/lib/05_wavescale.lua"/>
+   <file name="assets/luasopia/lib/06_ishit.lua"/>
    <file name="assets/luasopia/lib/_stanard lib.txt"/>
-   <file name="assets/luasopia/lib/ishit.lua"/>
    <file name="assets/luasopia/lib/maketile.lua"/>
    <file name="assets/luasopia/lib/path.lua"/>
+   <file name="assets/luasopia/lib/push.lua"/>
    <file name="assets/luasopia/lib/tail.lua"/>
    <file name="assets/luasopia/lib/track.lua"/>
   </folder>
   <folder name="shape">
+   <file name="assets/luasopia/shape/arrow.lua"/>
    <file name="assets/luasopia/shape/circle.lua"/>
    <file name="assets/luasopia/shape/heart.lua"/>
    <file name="assets/luasopia/shape/polygon.lua"/>
@@ -122,6 +125,7 @@
    <file name="assets/luasopia/ttf/typed.ttf"/>
   </folder>
   <folder name="widget">
+   <file name="assets/luasopia/widget/alert.lua"/>
    <file name="assets/luasopia/widget/button.lua"/>
    <file name="assets/luasopia/widget/progressbar.lua"/>
   </folder>
@@ -185,15 +189,17 @@
     <file name="assets/root/ex/basic/stars2.lua"/>
    </folder>
    <folder name="test">
+    <file name="assets/root/ex/test/arrow.lua"/>
+    <file name="assets/root/ex/test/button1.lua"/>
     <file name="assets/root/ex/test/circle1.lua"/>
     <file name="assets/root/ex/test/class1.lua"/>
-    <file name="assets/root/ex/test/coll.lua"/>
-    <file name="assets/root/ex/test/coll2.lua"/>
-    <file name="assets/root/ex/test/coll3.lua"/>
     <file name="assets/root/ex/test/expl1.lua"/>
     <file name="assets/root/ex/test/group1.lua"/>
     <file name="assets/root/ex/test/grpclear.lua"/>
     <file name="assets/root/ex/test/heart1.lua"/>
+    <file name="assets/root/ex/test/hittest.lua"/>
+    <file name="assets/root/ex/test/hittest2.lua"/>
+    <file name="assets/root/ex/test/hittest_pt.lua"/>
     <file name="assets/root/ex/test/line1.lua"/>
     <file name="assets/root/ex/test/logf1.lua"/>
     <file name="assets/root/ex/test/love2d.lua"/>
@@ -210,6 +216,7 @@
     <file name="assets/root/ex/test/touch1.lua"/>
     <file name="assets/root/ex/test/wave1.lua"/>
    </folder>
+   <file name="assets/root/ex/300x300.png"/>
    <file name="assets/root/ex/bird.png"/>
    <file name="assets/root/ex/bounce.wav"/>
    <file name="assets/root/ex/brick.png"/>

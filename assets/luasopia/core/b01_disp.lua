@@ -1,16 +1,14 @@
--- print('core.dobj')
 --------------------------------------------------------------------------------
 local tIn = table.insert
 local tRm = table.remove
 local tmgapf = 1000/_luasopia.fps
 local int = math.floor
 local Timer = Timer
-local timers = Timer._tmrs -- 2020/06/24:Disp:remove()함수 내에서 직접 접근
+local timers = Timer.__tmrs -- 2020/06/24:Disp:remove()함수 내에서 직접 접근
 --local baselayer = _luasopia.baselayer
 local lsp = _luasopia
 local cx, cy = lsp.centerx, lsp.centery
 --------------------------------------------------------------------------------
--- ref : https://luasopia.blogspot.com/p/blog-page.html
 -- 2020/02/06: 모든 set함수는 self를 반환하도록 수정됨
 -- 향후: 내부코드는 속도를 조금이라도 높이기 위해서 self.__bd객체를 직접 접근한다
 ----------------------------------------------------------------------------------
@@ -19,8 +17,10 @@ Display = class()
 -- static members of this class ------------------------------------------------
 --------------------------------------------------------------------------------
 local dobjs = {} -- Display OBJectS
-Display._dtobj = {}
-local dtobj = Display._dtobj -- Display Tagged OBJect
+
+-- tagged display object (tdobj) 들의 객체를 저장하는 테이블
+Display.__tdobj = {}
+local tdobj = Display.__tdobj -- Display Tagged OBJect
 -- local ndobjs = 0
 -------------------------------------------------------------------------------
 -- static public method
@@ -29,7 +29,7 @@ local dtobj = Display._dtobj -- Display Tagged OBJect
 -- 따라서 updateAll()함수의 구조가 (위의 함수와 비교해서) 매우 간단해 짐
 Display.updateAll = function()
     for _, obj in pairs(dobjs) do --for k = #dobjs,1,-1 do local obj = dobjs[k]
-        obj:__upd()
+        obj:__upd__()
     end
 end
 
@@ -55,22 +55,23 @@ function Display:init()
     self:xy(cx, cy)
 
     self.__bd.__obj = self -- body에 원객체를 등록 (_Grp의 __del함수에서 사용)
-    self.__al = self.__al or 1 -- only for coronaSDK (for storing alpha)
+    self.__al = self.__al or 1 -- only for coronaSDK (for storing al.pha)
 
     dobjs[self] = self
-    self._iupds = {} -- 내부 update함수들을 저장
+    self.__iupds = {} -- 내부 update함수들을 저장
+
 end
 
 -- This function is called in every frames
-function Display:__upd()
+function Display:__upd__()
     
     if self.touch and self.__tch==nil then self:__touchon() end
     if self.tap and self.__tap==nil then self:__tapon() end
 
-    if self._noupd then return end -- self._noupd==true이면 갱신 금지------------
+    if self.__noupd then return end -- self.__noupd==true이면 갱신 금지------------
 
-    if self.__d then self:__playd() end  -- move{}
-    if self.__tr then self:__playTr() end -- shift{}
+    if self.__mv then self:__playmv__() end  -- move{}
+    if self.__tr then self:__playtr__() end -- shift{}
     
     -- 2020/02/16 call user update if exists
     if self.update and self:update() then
@@ -78,7 +79,7 @@ function Display:__upd()
     end
 
     --2020/07/01 내부갱신함수들이 있다면 호출
-    for _, fn in pairs(self._iupds) do
+    for _, fn in pairs(self.__iupds) do
         if fn(self) then return self:remove() end
     end
 
@@ -106,13 +107,13 @@ end
 
 
 function Display:resumeupdate()
-    self._noupd = false
+    self.__noupd = false
     --타이머도 다시 시작해야 한다.(2020/07/01)
     return self
 end
 
 function Display:stopupdate()
-    self._noupd = true
+    self.__noupd = true
     --타이머도 다 멈추어야 한다.(2020/07/01)
     return self
 end
@@ -129,14 +130,53 @@ function Display:isremoved() return self.__bd==nil end
 --2020/06/12
 function Display:getparent() return self.__pr end
 
---2020/07/01 : handle Internal UPDateS (_iupds)
-function Display:addupdate( fn )
-    self._iupds[fn] = fn
+--2020/07/01 : handle Internal UPDateS (__iupds)
+function Display:__addupd__( fn )
+    self.__iupds[fn] = fn
 end
 
 --2020/08/27: added
-function Display:getwidth() return 0 end
-function Display:getheight() return 0 end
+function Display:getwidth() return self.__wdt or 0 end
+function Display:getheight() return self.__hgt or 0 end
+
+--2020/03/03 추가
+function Display:tag(name)
+
+    -- 2021/05/25에 아래 if문 추가
+    -- tag()메서드를 통해서 기존의 name을 바꿀 수 있다
+    if self.__tag then -- 기존의 이름이 있다면 
+        tdobj[self.__tag][self] = nil -- tdobj테이블에서 제거
+    end
+
+    self.__tag = name
+    -- 2020/06/21 tagged객체는 아래와 같이 tdobj에 별도로 (중복) 저장
+    if tdobj[name] == nil then
+        tdobj[name] = {[self]=self}
+    else
+        tdobj[name][self] = self
+    end
+    return self
+
+end
+
+--2020/06/21 tdobj에 tagged객체를 따로 저장하기 때문에
+-- collect()함수에서 매번 for반복문으로 tagged객체를 모을 필요가 없어졌음
+function Display.collect(name)
+
+    return tdobj[name] or {}
+
+end
+
+--2021/05/25 added : 기존의 tag를 제거
+function Display:detag()
+
+    if self.__tag then -- 기존의 이름이 있다면 
+        tdobj[self.__tag][self] = nil -- tdobj테이블에서 제거
+        self.__tag = nil
+    end
+    return self
+
+end
 
 --------------------------------------------------------------------------------
 if _Gideros then -- gideros
@@ -242,11 +282,11 @@ if _Gideros then -- gideros
         if self.__tap then self:stoptap() end
 
         self.__bd:removeFromParent()
-        self.__bd = nil -- __del__()이 호출되었음을 표시한다.
+        self.__bd = nil -- remove()가 호출되어 삭제되었음을 이것으로 확인
 
         --2020/06/20 dobj[self]=self로 저장하기 때문에 삭제가 아래에서 바로 가능해짐
         dobjs[self] = nil
-        if self._tag ~=nil then dtobj[self._tag][self] = nil end
+        if self.__tag ~=nil then tdobj[self.__tag][self] = nil end
         -- ndobjs = ndobjs - 1
     end
 
@@ -285,16 +325,6 @@ elseif _Corona then -- if coronaSDK
         t = arg.a or arg.alpha; if t then self.__al, self.__bd.alpha = t, t end
         t = arg.xs or arg.xscale; if t then self.__bd.xScale = t end
         t = arg.ys or arg.yscale; if t then self.__bd.yScale = t end
-        --[[
-        -- 2020/03/08: 추가
-        if arg.dx then self.__d = self.__d or {};self.__d.dx = arg.dx end
-        if arg.dy then self.__d = self.__d or {};self.__d.dy = arg.dy end
-        t = arg.dr or arg.drot; if t then self.__d = self.__d or {};self.__d.dr = t end
-        t = arg.da or arg.dalpha; if t then self.__d = self.__d or {};self.__d.da = t end
-        t = arg.ds or arg.dscale; if t then self.__d = self.__d or {};self.__d.ds = t end
-        t = arg.dxs or arg.dxscale; if t then self.__d = self.__d or {};self.__d.dxs = t end
-        t = arg.dys or arg.dyscale; if t then self.__d = self.__d or {};self.__d.dys = t end
-        --]]
         return self
     end
 
@@ -343,7 +373,7 @@ elseif _Corona then -- if coronaSDK
         --2020/06/20 소멸자안에서 dobjs 테이블의 참조를 삭제한다
         dobjs[self] = nil
         -- ndobjs = ndobjs - 1
-        if self._tag ~=nil then dtobj[self._tag][self] = nil end
+        if self.__tag ~=nil then tdobj[self.__tag][self] = nil end
     end
 
     function Display:tint(r,g,b)
