@@ -5,7 +5,7 @@ local Color = Color
 local ttfs = {'opensans', 'typed', 'cabin', 'cruft',}
 local ttfurl = 'luasopia/ttf/%s.ttf'
 local fontname0 = ttfs[1] 		-- default font 
-local fontsize0 = 50 			-- default font size
+local fontsize0 = 40			-- default font size (50)
 local fontcolor0 = Color.WHITE	--default font color
 --------------------------------------------------------------------------------
 local Disp = Display
@@ -218,6 +218,9 @@ elseif _Corona then
 			font = fonturl,
 			fontSize = self.__fsz
 		})
+
+		text.anchorX, text.anchorY = 0.5,0.5 -- 2021/08/13
+
 		local fc = self.__fclr
 		text:setFillColor(fc.r, fc.g, fc.b)
 
@@ -268,7 +271,7 @@ elseif _Corona then
 	function Text:setstring(str,...)
 
 		self.__str = strf(str,...)
-		self.__tbd.text = self.__str
+		self.__tbd.text = self.__str  --<<== C stack overflow
 
 		-- string이 변경되었다면 anchor point도 다시 잡아줘야된다.
 		self.__tbd.x = 0.5*self:getwidth()*(1-2*self.__apx)
@@ -287,13 +290,16 @@ elseif _Corona then
 
 	end
 	
+
 	function Text:setfont(fontname, size)
+
 		self.__fnm = fontname -- fontname은 필수요소임
 		self.__fsz = size or self.__fsz -- size가 nil이면 기존크기로
 		self.__tbd:removeSelf()
 		self.__tbd = self:__mktxt__()
 		self.__bd:insert(self.__tbd)
 		return self
+
 	end
 
 	function Text:getfontsize() return self.__tbd.size end

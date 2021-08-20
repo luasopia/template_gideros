@@ -96,5 +96,6 @@ assets/icon.png
 assets/root/ex/
 assets/root/lib/*
 !assets/root/lib/note.txt
+.tmp/
 
 # End of https://www.gitignore.io/api/lua,windows,visualstudiocode

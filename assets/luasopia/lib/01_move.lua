@@ -1,12 +1,18 @@
--- print('core.disp_tr')
+--------------------------------------------------------------------------------
+-- 2021/08/11: modified to use internal update
+--------------------------------------------------------------------------------
 
 local Dp = Display
 
-function Dp:__playmv__()
+
+local function move(self)
+
     local d = self.__mv
-    local t
-    --print(self:getAlpha())
-    if d.dx then self:x(self:getx() + d.dx) end
+    
+    if d.dx then
+        self:x(self:getx() + d.dx)
+    end
+
     if d.dy then self:y(self:gety() + d.dy) end
     if d.drot then self:rot(self:getrot() +  d.drot) end
     if d.dscale then self:scale(self:getscale() + d.dscale) end
@@ -14,22 +20,124 @@ function Dp:__playmv__()
 
     if d.dxscale then self:xscale(self:getxscale() + d.dxscale) end
     if d.dyscale then self:yscale(self:getyscale() + d.dyscale) end
+
 end
 
-function Dp:move(arg) self.__mv = arg; return self end
-function Dp:stopmove() self.__mv = nil; return self end
+
+function Dp:move(mv)
+
+    self.__mv = mv
+    self.__iupds[move] = move
+    return self
+
+end
+
+
+function Dp:pausemove()
+
+    self.__iupds[move] = nil
+    return self
+
+end
+
+
+function Dp:resumemove()
+
+    self.__iupds[move] = move
+    return self
+
+end
+
+
+function Dp:stopmove()
+
+    self.__mv = nil
+    self.__iupds[move] = nil
+    return self
+
+end
 
 --------------------------------------------------------------------------------
 -- 2020/02/18, 2021/04/27 : modified as follows
 --------------------------------------------------------------------------------
-function Dp:setdx(d) self.__mv=self.__mv or {}; self.__mv.dx=d; return self end
-function Dp:setdy(d) self.__mv=self.__mv or {}; self.__mv.dy=d; return self end
-function Dp:setdrot(d) self.__mv=self.__mv or {}; self.__mv.drot = d; return self end
-function Dp:setdscale(d) self.__mv = self.__mv or {}; self.__mv.dscale = d; return self end
-function Dp:setdalpha(d) self.__mv = self.__mv or {}; self.__mv.dalpha = d; return self end
-function Dp:setdxscale(d) self.__mv=self.__mv or {}; self.__mv.dxscale = d; return self end
-function Dp:setdyscale(d) self.__mv=self.__mv or {}; self.__mv.dyscale = d; return self end
-function Dp:setdxdy(dx,dy) self.__mv=self.__mv or {}; self.__mv.dx,self.__mv.dy=dx,dy; return self end
+function Dp:setdx(d)
+
+    self.__mv=self.__mv or {}
+    self.__mv.dx = d
+    self.__iupds[move] = move
+    return self
+
+end
+
+
+function Dp:setdy(d)
+
+    self.__mv=self.__mv or {}
+    self.__mv.dy=d
+    self.__iupds[move] = move
+    return self
+
+end
+
+
+function Dp:setdrot(d)
+
+    self.__mv = self.__mv or {}
+    self.__mv.drot = d
+    self.__iupds[move] = move
+    return self
+
+end
+
+
+function Dp:setdscale(d)
+
+    self.__mv = self.__mv or {}
+    self.__mv.dscale = d
+    self.__iupds[move] = move
+    return self
+
+end
+
+
+function Dp:setdalpha(d)
+
+    self.__mv = self.__mv or {}
+    self.__mv.dalpha = d
+    self.__iupds[move] = move
+    return self
+
+end
+
+
+function Dp:setdxscale(d)
+
+    self.__mv=self.__mv or {}
+    self.__mv.dxscale = d
+    self.__iupds[move] = move
+    return self
+
+end
+
+
+function Dp:setdyscale(d)
+
+    self.__mv=self.__mv or {}
+    self.__mv.dyscale = d
+    self.__iupds[move] = move
+    return self
+
+end
+
+
+function Dp:setdxdy(dx,dy)
+
+    self.__mv=self.__mv or {}
+    self.__mv.dx, self.__mv.dy = dx, dy
+    self.__iupds[move] = move
+    return self
+
+end
 
 --------------------------------------------------------------------------------
 -- 2020/02/25 : add getd() methods
@@ -58,9 +166,3 @@ Dp.dscale = Dp.setdscale
 Dp.dalpha = Dp.setdalpha
 Dp.dxscale = Dp.setdxscale
 Dp.dyscale = Dp.setdyscale
-
---Dp.getdr = Dp.getdrot
---Dp.getds = Dp.getdscale
---Dp.getda = Dp.getdalpha
---Dp.getdxs =  Dp.getdxscale
---Dp.getdys = Dp.getdyscale
