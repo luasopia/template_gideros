@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
- <properties osx_org="GiderosMobile" touchToMouse="1" html5_mem="256" splashScaleMode="0" build_number="1" osx_bundle="com.yourdomain." autorotation="0" architecture="7" exportMode="0" scaleMode="3" macos_bundle="com.yourdomain.yourapp-macos" fps="60" splash_h_image="" winrt_org="GiderosMobile" splash_v_image="" html5_fbload="100" ios_bundle="com.yourdomain." win_domain="giderosmobile.com" macos_category="5" windowHeight="0" atv_bundle="com.yourdomain.yourapp-atv" html5_wasm="0" windowWidth="0" app_icon="" mainluaOnly="1" html5_symbols="0" encryptCode="1" iosDevice="0" encryptAssets="1" mouseToTouch="1" tv_icon="" version="1.0" html5_pwa="0" win_org="GiderosMobile" winrt_package="com.yourdomain.yourapp" mouseTouchOrder="0" osx_installerId="" version_code="1" html5_fbinstant="0" logicalWidth="1080" vsync="1" osx_domain="giderosmobile.com" osx_category="5" html5_pack="0" orientation="0" logicalHeight="1920" backgroundColor="#ffffff" app_name="" html5_crash="" html5_host="" osx_signingId="" retinaDisplay="0" disableSplash="0">
+ <properties scaleMode="3" html5_fbinstant="0" build_number="1" win_org="GiderosMobile" encryptAssets="1" html5_mem="256" mouseToTouch="1" osx_domain="giderosmobile.com" windowHeight="0" encryptCode="1" autorotation="0" winrt_org="GiderosMobile" version="1.0" windowWidth="0" touchToMouse="1" html5_fbload="100" architecture="7" disableSplash="0" html5_crash="" iosDevice="0" atv_bundle="com.yourdomain.yourapp-atv" osx_category="5" osx_bundle="com.yourdomain." mouseTouchOrder="0" win_domain="giderosmobile.com" orientation="0" fps="60" html5_wasm="0" html5_host="" osx_signingId="" osx_org="GiderosMobile" winrt_package="com.yourdomain.yourapp" html5_pwa="0" vsync="1" mainluaOnly="1" retinaDisplay="0" backgroundColor="#ffffff" ios_bundle="com.yourdomain." html5_pack="0" html5_symbols="0" app_icon="" splashScaleMode="0" splash_h_image="" exportMode="0" splash_v_image="" osx_installerId="" macos_category="5" logicalWidth="1080" macos_bundle="com.yourdomain.yourapp-macos" logicalHeight="1920" app_name="" tv_icon="" version_code="1">
   <imageScales/>
   <plugins/>
   <exports>
@@ -20,6 +20,7 @@
    </export>
   </exports>
  </properties>
+ <folder name=".vscode"/>
  <folder name="AndroidResources">
   <folder name="res">
    <folder name="mipmap-anydpi-v26">
@@ -91,12 +92,14 @@
    <file name="assets/luasp/core/d02_text1.lua"/>
    <file name="assets/luasp/core/e02_shape.lua"/>
    <file name="assets/luasp/core/e30_line.lua"/>
+   <file name="assets/luasp/core/e31_line1.lua"/>
    <file name="assets/luasp/core/f01_sound.lua"/>
    <file name="assets/luasp/core/g01_scene.lua"/>
    <file name="assets/luasp/core/h01_pxmode.lua"/>
    <file name="assets/luasp/core/h02_dot.lua"/>
-   <file name="assets/luasp/core/h03_getpixels.lua"/>
-   <file name="assets/luasp/core/h04_pixels.lua"/>
+   <file name="assets/luasp/core/h03_palette.lua"/>
+   <file name="assets/luasp/core/h04_getpixels.lua"/>
+   <file name="assets/luasp/core/h05_pixels.lua"/>
    <file name="assets/luasp/core/z01_enterframe.lua"/>
   </folder>
   <folder name="lib">
@@ -106,7 +109,6 @@
    <file name="assets/luasp/lib/04_blink.lua"/>
    <file name="assets/luasp/lib/05_wavescale.lua"/>
    <file name="assets/luasp/lib/06_ishit.lua"/>
-   <file name="assets/luasp/lib/06_ishit0.lua"/>
    <file name="assets/luasp/lib/maketile.lua"/>
    <file name="assets/luasp/lib/path.lua"/>
    <file name="assets/luasp/lib/push.lua"/>
@@ -129,6 +131,23 @@
    <file name="assets/luasp/ttf/opensans.ttf"/>
    <file name="assets/luasp/ttf/typed.ttf"/>
   </folder>
+  <folder name="util">
+   <folder name="builderhome">
+    <file name="assets/luasp/util/builderhome/scene.lua"/>
+   </folder>
+   <folder name="esc">
+    <file name="assets/luasp/util/esc/cli.lua"/>
+    <file name="assets/luasp/util/esc/console.lua"/>
+    <file name="assets/luasp/util/esc/toolbar.lua"/>
+   </folder>
+   <folder name="pxbuilder">
+    <file name="assets/luasp/util/pxbuilder/paletgrid.lua"/>
+    <file name="assets/luasp/util/pxbuilder/pxartset.lua"/>
+    <file name="assets/luasp/util/pxbuilder/pxgrid.lua"/>
+    <file name="assets/luasp/util/pxbuilder/scene.lua"/>
+   </folder>
+   <file name="assets/luasp/util/file.lua"/>
+  </folder>
   <folder name="widget">
    <file name="assets/luasp/widget/01_button.lua"/>
    <file name="assets/luasp/widget/02_progressbar.lua"/>
@@ -138,16 +157,7 @@
   </folder>
   <file name="assets/luasp/init.lua"/>
  </folder>
- <folder name="luasputil">
-  <folder name="pixelmode">
-   <file name="assets/luasputil/pixelmode/mapbuilder.lua"/>
-   <file name="assets/luasputil/pixelmode/spritebuilder.lua"/>
-  </folder>
-  <file name="assets/luasputil/cliexec.lua"/>
-  <file name="assets/luasputil/readme.txt"/>
- </folder>
  <folder name="root">
-  <folder name="data"/>
   <folder name="ex">
    <folder name=".tmp">
     <file name="assets/root/ex/.tmp/moon.png"/>
@@ -203,6 +213,7 @@
     <file name="assets/root/ex/basic/ex20.lua"/>
     <file name="assets/root/ex/basic/ex21.lua"/>
     <file name="assets/root/ex/basic/ex22.lua"/>
+    <file name="assets/root/ex/basic/input.lua"/>
     <file name="assets/root/ex/basic/progress1.lua"/>
     <file name="assets/root/ex/basic/scn1.lua"/>
     <file name="assets/root/ex/basic/scn2.lua"/>
@@ -213,6 +224,7 @@
     <file name="assets/root/ex/basic/stars2.lua"/>
    </folder>
    <folder name="study">
+    <file name="assets/root/ex/study/gidfile.lua"/>
     <file name="assets/root/ex/study/hittest1.lua"/>
     <file name="assets/root/ex/study/imagehit.lua"/>
     <file name="assets/root/ex/study/line1.lua"/>
@@ -245,6 +257,7 @@
     <file name="assets/root/ex/test/pixel5.lua"/>
     <file name="assets/root/ex/test/pixel5b.lua"/>
     <file name="assets/root/ex/test/pixel5c.lua"/>
+    <file name="assets/root/ex/test/pixel6.lua"/>
     <file name="assets/root/ex/test/polygon1.lua"/>
     <file name="assets/root/ex/test/print1.lua"/>
     <file name="assets/root/ex/test/px0_1.lua"/>
@@ -265,15 +278,16 @@
    <file name="assets/root/ex/300x300.png"/>
    <file name="assets/root/ex/_main.lua"/>
    <file name="assets/root/ex/alien.png"/>
+   <file name="assets/root/ex/beep.wav"/>
    <file name="assets/root/ex/bird.png"/>
    <file name="assets/root/ex/bounce.wav"/>
    <file name="assets/root/ex/brick.png"/>
    <file name="assets/root/ex/cat.png"/>
+   <file name="assets/root/ex/effectup.wav"/>
    <file name="assets/root/ex/expl.png"/>
    <file name="assets/root/ex/fish.png"/>
    <file name="assets/root/ex/gear.png"/>
    <file name="assets/root/ex/gideros.png"/>
-   <file name="assets/root/ex/hit.wav"/>
    <file name="assets/root/ex/levelup.wav"/>
    <file name="assets/root/ex/man.png"/>
    <file name="assets/root/ex/mask.png"/>
@@ -281,9 +295,7 @@
    <file name="assets/root/ex/myship1.png"/>
    <file name="assets/root/ex/pipe.png"/>
    <file name="assets/root/ex/pixel.lua"/>
-   <file name="assets/root/ex/pixel.png"/>
    <file name="assets/root/ex/runw.png"/>
-   <file name="assets/root/ex/scoreup.wav"/>
    <file name="assets/root/ex/ship.png"/>
    <file name="assets/root/ex/smoke.png"/>
    <file name="assets/root/ex/solar2d.png"/>
@@ -306,6 +318,8 @@
    </folder>
    <file name="assets/root/lib/note.txt"/>
   </folder>
+  <file name="assets/root/alien(pxs).lua"/>
+  <file name="assets/root/config.lua"/>
   <file name="assets/root/main.lua"/>
  </folder>
  <file name="assets/.gitignore"/>
