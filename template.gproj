@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
- <properties scaleMode="3" html5_fbinstant="0" build_number="1" win_org="GiderosMobile" encryptAssets="1" html5_mem="256" mouseToTouch="1" osx_domain="giderosmobile.com" windowHeight="0" encryptCode="1" autorotation="0" winrt_org="GiderosMobile" version="1.0" windowWidth="0" touchToMouse="1" html5_fbload="100" architecture="7" disableSplash="0" html5_crash="" iosDevice="0" atv_bundle="com.yourdomain.yourapp-atv" osx_category="5" osx_bundle="com.yourdomain." mouseTouchOrder="0" win_domain="giderosmobile.com" orientation="0" fps="60" html5_wasm="0" html5_host="" osx_signingId="" osx_org="GiderosMobile" winrt_package="com.yourdomain.yourapp" html5_pwa="0" vsync="1" mainluaOnly="1" retinaDisplay="0" backgroundColor="#ffffff" ios_bundle="com.yourdomain." html5_pack="0" html5_symbols="0" app_icon="" splashScaleMode="0" splash_h_image="" exportMode="0" splash_v_image="" osx_installerId="" macos_category="5" logicalWidth="1080" macos_bundle="com.yourdomain.yourapp-macos" logicalHeight="1920" app_name="" tv_icon="" version_code="1">
+ <properties logicalHeight="1920" win_domain="giderosmobile.com" encryptAssets="1" osx_domain="giderosmobile.com" mainluaOnly="1" ios_bundle="com.yourdomain." build_number="1" autorotation="0" windowHeight="0" osx_org="GiderosMobile" app_icon="" mouseTouchOrder="0" splashScaleMode="0" version="1.0" macos_category="5" retinaDisplay="0" win_org="GiderosMobile" disableSplash="0" splash_h_image="" osx_category="5" html5_fbload="100" osx_bundle="com.yourdomain." app_name="" backgroundColor="#ffffff" encryptCode="1" splash_v_image="" exportMode="0" touchToMouse="1" tv_icon="" html5_mem="256" atv_bundle="com.yourdomain.yourapp-atv" scaleMode="3" osx_signingId="" winrt_package="com.yourdomain.yourapp" winrt_org="GiderosMobile" orientation="0" macos_bundle="com.yourdomain.yourapp-macos" mouseToTouch="1" logicalWidth="1080" html5_symbols="0" fps="60" iosDevice="0" osx_installerId="" architecture="7" version_code="1" html5_pwa="0" windowWidth="0" html5_pack="0" vsync="1" html5_crash="" html5_fbinstant="0" html5_host="" html5_wasm="0">
   <imageScales/>
   <plugins/>
   <exports>
@@ -141,6 +141,7 @@
     <file name="assets/luasp/util/esc/toolbar.lua"/>
    </folder>
    <folder name="pxbuilder">
+    <file name="assets/luasp/util/pxbuilder/fileset.lua"/>
     <file name="assets/luasp/util/pxbuilder/paletgrid.lua"/>
     <file name="assets/luasp/util/pxbuilder/pxartset.lua"/>
     <file name="assets/luasp/util/pxbuilder/pxgrid.lua"/>
@@ -153,11 +154,16 @@
    <file name="assets/luasp/widget/02_progressbar.lua"/>
    <file name="assets/luasp/widget/03_alert.lua"/>
    <file name="assets/luasp/widget/04_entry.lua"/>
+   <file name="assets/luasp/widget/05_labelbox.lua"/>
    <file name="assets/luasp/widget/confirm.lua"/>
   </folder>
   <file name="assets/luasp/init.lua"/>
  </folder>
  <folder name="root">
+  <folder name="data">
+   <file name="assets/root/data/alien(pxs).lua"/>
+   <file name="assets/root/data/missle(pxs).lua"/>
+  </folder>
   <folder name="ex">
    <folder name=".tmp">
     <file name="assets/root/ex/.tmp/moon.png"/>
@@ -224,6 +230,7 @@
     <file name="assets/root/ex/basic/stars2.lua"/>
    </folder>
    <folder name="study">
+    <file name="assets/root/ex/study/container.lua"/>
     <file name="assets/root/ex/study/gidfile.lua"/>
     <file name="assets/root/ex/study/hittest1.lua"/>
     <file name="assets/root/ex/study/imagehit.lua"/>
@@ -318,7 +325,6 @@
    </folder>
    <file name="assets/root/lib/note.txt"/>
   </folder>
-  <file name="assets/root/alien(pxs).lua"/>
   <file name="assets/root/config.lua"/>
   <file name="assets/root/main.lua"/>
  </folder>
