@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
- <properties fps="60" splashScaleMode="0" tv_icon="" iosDevice="0" osx_category="5" osx_bundle="com.yourdomain." logicalHeight="1920" touchToMouse="1" autorotation="0" mouseToTouch="1" macos_category="5" osx_domain="giderosmobile.com" html5_fbload="100" splash_h_image="" macos_bundle="com.yourdomain.yourapp-macos" winrt_package="com.yourdomain.yourapp" win_org="GiderosMobile" version="1.0" html5_wasm="0" html5_fbinstant="0" vsync="1" app_icon="" mouseTouchOrder="0" encryptCode="1" retinaDisplay="0" html5_crash="" backgroundColor="#ffffff" scaleMode="3" osx_signingId="" architecture="7" splash_v_image="" windowHeight="0" version_code="1" html5_mem="256" encryptAssets="1" html5_host="" logicalWidth="1080" disableSplash="0" html5_pwa="0" atv_bundle="com.yourdomain.yourapp-atv" osx_org="GiderosMobile" app_name="" exportMode="0" windowWidth="0" ios_bundle="com.yourdomain." winrt_org="GiderosMobile" osx_installerId="" orientation="0" win_domain="giderosmobile.com" html5_pack="0" html5_symbols="0" build_number="1" mainluaOnly="1">
+ <properties version="1.0" html5_wasm="0" ios_bundle="com.yourdomain." backgroundColor="#ffffff" osx_domain="giderosmobile.com" architecture="7" html5_fbinstant="0" html5_mem="256" mouseTouchOrder="0" build_number="1" html5_pack="0" tv_icon="" vsync="1" osx_signingId="" osx_org="GiderosMobile" html5_host="" splash_v_image="" windowHeight="0" win_domain="giderosmobile.com" osx_bundle="com.yourdomain." iosDevice="0" macos_category="5" encryptAssets="1" logicalWidth="1080" exportMode="0" mouseToTouch="1" scaleMode="3" version_code="1" winrt_package="com.yourdomain.yourapp" logicalHeight="1920" fps="60" html5_fbload="100" html5_symbols="0" disableSplash="0" macos_bundle="com.yourdomain.yourapp-macos" orientation="0" mainluaOnly="1" splashScaleMode="0" app_icon="" osx_installerId="" html5_crash="" atv_bundle="com.yourdomain.yourapp-atv" windowWidth="0" win_org="GiderosMobile" osx_category="5" app_name="" retinaDisplay="0" touchToMouse="1" autorotation="0" winrt_org="GiderosMobile" encryptCode="1" html5_pwa="0" splash_h_image="">
   <imageScales/>
   <plugins/>
   <exports>
@@ -229,6 +229,7 @@
     <file name="assets/root/ex/basic/sprite1.lua"/>
     <file name="assets/root/ex/basic/stars1.lua"/>
     <file name="assets/root/ex/basic/stars2.lua"/>
+    <file name="assets/root/ex/basic/wavescale1.lua"/>
    </folder>
    <folder name="study">
     <file name="assets/root/ex/study/container.lua"/>
@@ -241,6 +242,7 @@
    </folder>
    <folder name="test">
     <file name="assets/root/ex/test/arrow.lua"/>
+    <file name="assets/root/ex/test/bantouch.lua"/>
     <file name="assets/root/ex/test/button1.lua"/>
     <file name="assets/root/ex/test/circle1.lua"/>
     <file name="assets/root/ex/test/class1.lua"/>
@@ -285,8 +287,6 @@
    </folder>
    <file name="assets/root/ex/300x300.png"/>
    <file name="assets/root/ex/_main.lua"/>
-   <file name="assets/root/ex/alien.png"/>
-   <file name="assets/root/ex/beep.wav"/>
    <file name="assets/root/ex/bird.png"/>
    <file name="assets/root/ex/bounce.wav"/>
    <file name="assets/root/ex/brick.png"/>
@@ -297,19 +297,20 @@
    <file name="assets/root/ex/fish.png"/>
    <file name="assets/root/ex/gear.png"/>
    <file name="assets/root/ex/gideros.png"/>
-   <file name="assets/root/ex/levelup.wav"/>
    <file name="assets/root/ex/man.png"/>
    <file name="assets/root/ex/mask.png"/>
    <file name="assets/root/ex/moon.png"/>
    <file name="assets/root/ex/myship1.png"/>
    <file name="assets/root/ex/pipe.png"/>
    <file name="assets/root/ex/pixel.lua"/>
-   <file name="assets/root/ex/runw.png"/>
+   <file name="assets/root/ex/pong.wav"/>
+   <file name="assets/root/ex/rungirl.png"/>
    <file name="assets/root/ex/ship.png"/>
    <file name="assets/root/ex/smoke.png"/>
    <file name="assets/root/ex/solar2d.png"/>
    <file name="assets/root/ex/star.png"/>
    <file name="assets/root/ex/sun.png"/>
+   <file name="assets/root/ex/up.wav"/>
    <file name="assets/root/ex/warning.wav"/>
    <file name="assets/root/ex/waytohome.mp3"/>
    <file name="assets/root/ex/zet.wav"/>
