@@ -2,9 +2,9 @@
 -- 2021/08/30: remove 관련 메서드들을 파일로 따로 묶었다.
 --------------------------------------------------------------------------------
 
+local luasp = _luasopia
 local Timer = Timer
 local timers = Timer.__tmrs -- 2020/06/24:Disp:remove()함수 내에서 직접 접근
-local luasp = _luasopia
 local Disp = Display
 local dobjs = Disp.__dobjs
 local tdobj = Disp.__tdobj
@@ -12,9 +12,10 @@ local tdobj = Disp.__tdobj
 -- 아래는 pixelmode가 아닐 경우에 화면바깥으로 나갔다고 판단되는
 -- 경계값이다. 약간의 갭을 둔다
 local xgap, ygap = 100, 150
-luasp.out_x0, luasp.out_y0 = luasp.x0-xgap, luasp.y0-ygap
-luasp.out_endx, luasp.out_endy = luasp.endx+xgap, luasp.endy+ygap
--- luasp.out_endx, luasp.out_endy = luasp.endx+xgap, 1000
+-- luasp.out_x0, luasp.out_y0 = luasp.x0-xgap, luasp.y0-ygap
+-- luasp.out_endx, luasp.out_endy = luasp.endx+xgap, luasp.endy+ygap
+local out_x0, out_y0 = luasp.x0-xgap, luasp.y0-ygap
+local out_endx, out_endy = luasp.endx+xgap, luasp.endy+ygap
 
 -- pixelmode 일 경우 위의 값들을 다시 계산해야 한다.
 --------------------------------------------------------------------------------
@@ -36,7 +37,7 @@ function Display:removeafter(ms)
 
 end
 
-
+--[[
 --2021/08/30:added 객체가 화면 밖으로 나갔는지를 체크한다.
 local function isout(self)
 
@@ -98,6 +99,27 @@ local function isout(self)
     end
 
 end
+--]]
+
+local function isout(self)
+
+    local x0, y0 = out_x0, out_y0
+    local endx, endy = out_endx, out_endy
+    local cpg = self.__orct
+
+    for k=1,#cpg,2 do
+
+        local x, y = self:__getgxy__(cpg[k], cpg[k+1])
+
+        if x0<=x and x<=endx and y0<=y and y<=endy then
+            return false -- 점들 중 하나라도 영역 안쪽이면 false반환
+        end
+        
+    end
+    
+    return true -- 점들이 다 영역 밖이면 true반환
+
+end
 
 
 local function add_isout(self)
@@ -106,6 +128,7 @@ local function add_isout(self)
     self:__addupd12__(isout) -- 격프레임마다 체크한다.
 
 end
+
 
 --2021/08/30: delay(ms) 이후부터 화면밖으로 나갔는지 체크한다
 function Disp:removeifout(delay)
@@ -116,7 +139,8 @@ function Disp:removeifout(delay)
 
     else -- delay가 없다면 즉시 isout 등록
 
-        self.__iupds[isout] = isout
+        --self.__iupds[isout] = isout
+        self:__addupd12__(isout) -- 격프레임마다 체크한다.
 
     end
 
@@ -137,6 +161,8 @@ if _Gideros then
     -- gideros desctructor
     function Display:remove()
 
+        if self.__bd == nil then return end -- 2021/09/24
+
         if self.onremove then self:onremove() end -- 2021/08/30
 
         if self.__tmrs then -- 이 시점에서는 이미 죽은 timer도 있을 것
@@ -152,40 +178,47 @@ if _Gideros then
 
         self.__bd:removeFromParent()
         self.__bd = nil -- remove()가 호출되어 삭제되었음을 이것으로 확인
-
+        
         --2020/06/20 dobj[self]=self로 저장하기 때문에 삭제가 아래에서 바로 가능해짐
         dobjs[self] = nil
         if self.__tag ~=nil then tdobj[self.__tag][self] = nil end
-        -- ndobjs = ndobjs - 1
+        -- self.__pr.__chld[self] = nil -- 2021/09/24:부모에서 삭제
 
     end
+        
     
-    
-
+--------------------------------------------------------------------------------
 elseif _Corona then
+--------------------------------------------------------------------------------
 
 
     -- solar2d destructor
     function Disp:remove() --print('disp_del_') 
 
+        if self.__bd == nil then return end -- 2021/09/24
+
         if self.onremove then self:onremove() end -- 2021/08/30
 
         if self.__tmrs then -- 이 시점에서는 이미 죽은 timer도 있을 것
+
             for _, tmr in pairs(self.__tmrs) do
-                timers[tmr] = nil --tmr:remove()
+
+                timers[tmr] = nil -- tmr:remove()
+
             end
+
         end
 
         if self.__tch then self:stoptouch() end
         if self.__tap then self:stoptap() end
 
         self.__bd:removeSelf()
-        self.__bd = nil -- __del__()이 호출되었음을 표시하는 역할도 함
-
+        self.__bd = nil -- self:isremoved()에서 return self.__bd==nil 으로 이용됨
+        
         --2020/06/20 소멸자안에서 dobjs 테이블의 참조를 삭제한다
         dobjs[self] = nil
-        -- ndobjs = ndobjs - 1
         if self.__tag ~=nil then tdobj[self.__tag][self] = nil end
+        -- self.__pr.__chld[self] = nil -- 2021/09/24:부모에서 삭제
         
     end
     
