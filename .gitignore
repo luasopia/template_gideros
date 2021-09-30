@@ -97,5 +97,7 @@ assets/root/ex/
 assets/root/lib/*
 !assets/root/lib/note.txt
 .tmp/
+assets/root/data/
+.gitignore
 
 # End of https://www.gitignore.io/api/lua,windows,visualstudiocode
