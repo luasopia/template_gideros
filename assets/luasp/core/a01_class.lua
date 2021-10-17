@@ -3,8 +3,11 @@
 --------------------------------------------------------------------------------
 _luasopia.nilfunc = function() end
 local nilfunc = _luasopia.nilfunc
+local setmetatable = setmetatable
+local getmetatable = getmetatable
+--------------------------------------------------------------------------------
 
-
+-- 모든 클래스의 부모클래스
 local Object = {
 	init = nilfunc, -- default constructor
 	remove = nilfunc, -- default destructor
@@ -14,7 +17,7 @@ local Object = {
 local clsid = 0
 
 
-local function constructor(cls, ...)
+local function construct(cls, ...)
 
 	--local obj = setmetatable({ __clsid = true }, { __index = cls })
 	-- 2020/06/10: (2*) 때문에 아래와 같이 metatable을 cls로 설정 가능
@@ -50,15 +53,31 @@ class = function(baseClass)
 	cls.__index = cls --(*2) 이것으로 cls인지 obj인지를 type()함수에서 구별한다.
 
 	return setmetatable(
-		cls, -- cls (constructor의 cls로 넘겨짐)
+		cls, -- cls ( construct()의 cls로 넘겨짐 )
 		------------------------------------------------------------------------
 		-- 아래는 cls의 메타테이블
 		------------------------------------------------------------------------
 		{
 			__index = super, -- 상속구현
-			__call = constructor -- Classname(...) 과 같이 객체 생성
+			__call = construct -- Classname(...) 과 같이 객체 생성
 		}
 	)
+
+end
+
+
+-- 2021/10/06: 객체를 생성하지 못하고 상속만 가능한 virtualClass 추가
+-- virtualClass의 생성자. 에러를 발생시킨다.
+local function banConstruct()
+	error('Virtual class cannot make object.')
+end
+
+
+virtualClass = function(baseClass)
+
+	local cls = class(baseClass)
+	getmetatable(cls).__call = banConstruct
+	return cls
 
 end
 
@@ -69,10 +88,11 @@ end
 --2021/09/21: redefining type() global function
 -- type(data) returns 'class' if data itself is a class
 -- type(data) returns 'object' if data is an class instance
-local _type0 = type
-local function type(data)
+_type0 = type
+local type0 = _type0
+function type(data)
 	
-	local datatype = _type0(data)
+	local datatype = type0(data)
 	
     if datatype =='table' and data.__clsid then
         if data.__index == data then
@@ -85,13 +105,11 @@ local function type(data)
     end
 	
 end
-_type0 = _type0 -- create global function _type0()
-type = type		-- create global function type()
 
 
 -- 어떤 객체가 클래스의 객체인지를 판단하는 (전역)함수
 -- 2020/09/30 : 부모클래스에 대해서도 true를 반환하도록 수정
-local getmt = getmetatable
+
 function isObject(obj, cls)
 
 	--return _type0(obj)=='table' and obj.__clsid == cls.__clsid
@@ -100,7 +118,7 @@ function isObject(obj, cls)
 
 		local objcls = obj
 		repeat
-			objcls = getmt(objcls).__index
+			objcls = getmetatable(objcls).__index
 			if objcls.__clsid == cls.__clsid then 
 				return true
 			end
@@ -117,10 +135,11 @@ end
 
 
 --2021/09/21: redefining tostring() global function
-local _tostring0 = tostring
+_tostring0 = tostring
+local tostring0 = _tostring0
 function tostring(data)
 
-	local str = _tostring0(data)
+	local str = tostring0(data)
 	local datatype = type(data)
 
 	if datatype == 'class' then
@@ -134,4 +153,3 @@ function tostring(data)
 	end
 
 end
-_tostring0 = _tostring0

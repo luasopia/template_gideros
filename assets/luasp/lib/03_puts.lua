@@ -13,6 +13,8 @@ local int = math.floor
 local strf = string.format
 local nilfunc = luasp.nilfunc
 local stdoutlayer = luasp.stdoutlayer
+local Text1 = luasp.Text1
+local print0 = luasp.print0
 --------------------------------------------------------------------------------
 local stdout = Group():addTo(stdoutlayer)
 stdout:setXY(leftmargin, screen.height0-botmargin)
@@ -33,9 +35,9 @@ local numlines = 0
 local spaces={[0]='     ', '    ', '   ', '  ', ' '}
 
 local function get_print(...)
-	local str = ''
+
+    local str = ''
     local tab
-    -- _print0('#args:',#args)
     
 	for k=1,arg.n do
 
@@ -110,13 +112,14 @@ local function puts(str, no_new_line)
 end
 
 
-_print0 = print
+luasp.print0 = print
+print0 = luasp.print0
 
 function print(...)
 
     local str = get_print(...)
     puts(str)
-    _print0(str)
+    print0(str)
 
     return stdout
 
@@ -127,7 +130,7 @@ function printf(...)
 
     local str = strf(...)
     puts(str)
-    _print0(str)
+    print0(str)
 
     return stdout
 

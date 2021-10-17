@@ -17,15 +17,15 @@ function File:init(rname)
     
     self.pxshts = _require0(rname)
 
-    _print0(self.req0name)
-    _print0(self.dispname)
-    _print0(self.abspath)
+    print0(self.req0name)
+    print0(self.dispname)
+    print0(self.abspath)
 
 end
 
 
 
-local fileset = Labelbox('files',1070,200):setXY(10,150)
+local fileset = LabelBox('files',1070,200):setXY(10,150)
 
 
 function fileset:searchfiles()

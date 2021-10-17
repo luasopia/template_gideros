@@ -1,7 +1,7 @@
 
-local Disp = Display
-local Tmr = Timer
 local luasp = _luasopia
+local Disp = luasp.Display
+local Tmr = Timer
 
 
 --[[ 2021/09/16 update(e) 함수의 파라메터
@@ -16,7 +16,7 @@ if _Gideros then
 	local isoddfrm = true
 	local upd = function(e) 
 		
-		-- _print0(e.time, e.deltaTime, e.frameCount)
+		-- print0(e.time, e.deltaTime, e.frameCount)
 
 		isoddfrm = not isoddfrm -- 2021/08/23
 		Tmr.updateAll(e)

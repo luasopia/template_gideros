@@ -1,9 +1,10 @@
 -- 2020/07/01 refactoring Circle class 
 --------------------------------------------------------------------------------
-Circle = class(Shape)
---------------------------------------------------------------------------------
+local Shape = _luasopia.Shape
 local tins = table.insert
 local cos, sin, _2PI, floor = math.cos, math.sin, 2*math.pi, math.floor
+--------------------------------------------------------------------------------
+Circle = class(Shape)
 --------------------------------------------------------------------------------
 function Circle:__mkpts__()
 
@@ -49,7 +50,7 @@ end
 --2020/06/23
 function Circle:setRadius(r)
     self.__rds = r
-    self.__ccc = r
+    self.__ccc = {r=r, x=0, y=0, r2=r*r, r0=r}
 
     self.__pts = self:__mkpts__()
     return self:__redraw__()
@@ -57,7 +58,7 @@ function Circle:setRadius(r)
 end
 
 --2021/05/11
-function Circle:getradius()
+function Circle:getRadius()
 
     return self.__rds
     

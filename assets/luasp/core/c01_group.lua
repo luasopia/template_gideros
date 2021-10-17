@@ -1,6 +1,6 @@
 -- if not_required then return end -- This prevents auto-loading in Gideros
-
-local Disp = Display
+local luasp = _luasopia
+local Disp = luasp.Display
 
 Group = class(Disp)
 --------------------------------------------------------------------------------
@@ -16,18 +16,35 @@ if _Gideros then
 
         self.__bd = Snew()
         self.__cpt = {x=0, y=0} -- 2021/08/30
-        -- self.__chld = {} -- 2021/09/24
+        self.__isgrp = true -- Disp.__upd__()에서 onTap, onTouch를 건너뛴다
         return Disp.init(self)
 
     end
 
-
+    --[[
     function Group:add(child)
 
         child.__pr = self
         self.__bd:addChild(child.__bd)
         child:setXY(0,0) --2021/08/14:__bdx,__bdy를 갱신하기 위해서 이렇게 해야함
         -- self.__chld[child] = child -- 2021/09/24
+        return self
+
+    end
+    --]]
+
+    function Group:add(...)
+
+        local childs = {...}
+        
+        for _,child in ipairs(childs) do
+
+            child.__pr = self
+            self.__bd:addChild(child.__bd)
+            child:setXY(0,0) --2021/08/14:__bdx,__bdy를 갱신하기 위해서 이렇게 해야함
+
+        end
+        
         return self
 
     end
@@ -148,11 +165,13 @@ elseif _Corona then
 
         self.__bd = Gnew()
         self.__cpt = {x=0, y=0} -- 2021/08/30
+        self.__isgrp = false -- 2021/10/10: Disp.__upd__()에서 onTap/onTouch를 건너뛴다
         return Disp.init(self) --return self:superInit()
 
     end
 
 
+    --[[
     function Group:add(child)
 
         child.__pr = self
@@ -161,7 +180,25 @@ elseif _Corona then
         return self
     
     end
+    --]]
+
+    --2021/10/17: add()메서드에 두 개 이상의 child를 지정할 수 있도록 수정
+    function Group:add(...)
+
+        local childs = {...}
+        
+        for _ , child in ipairs(childs) do
+
+            child.__pr = self
+            self.__bd:insert(child.__bd)
+            child:setXY(0,0) --2021/08/14:__bdx,__bdy를 갱신 하기 위해서 이렇게 해야함
+            
+        end
+
+        return self
     
+    end
+
 
     -- Disp 베이스클래스의 remove()를 오버로딩
     function Group:remove()

@@ -20,7 +20,7 @@ local pkscl0 = 1.2 -- default peakScale
 --------------------------------------------------------------------------------
 local luasp = _luasopia
 local cos, _2PI = math.cos, 2*math.pi
-local Disp = Display
+local Disp = luasp.Display
 local nilfunc = luasp.nilfunc
 --------------------------------------------------------------------------------
 
@@ -164,7 +164,7 @@ local function wys_end(self)
 end
 
 
-function Disp:WaveScaleY(opt)
+function Disp:waveScaleY(opt)
 
     if self._ws_ytmr and not self._ws_ytmr:isRemoved() then
         self._ws_ytmr:remove()
