@@ -6,15 +6,22 @@ local fileurls = {
     ['sun.png'] = 'https://raw.githubusercontent.com/luasopia/data/master/png/sun.png',
     ['earth.png'] = 'https://raw.githubusercontent.com/luasopia/data/master/png/earth.png',
     ['moon.png'] = 'https://raw.githubusercontent.com/luasopia/data/master/png/moon.png',
+    ['gear.png'] = 'https://raw.githubusercontent.com/luasopia/data/master/png/gear.png',
     ['star.png'] = 'https://raw.githubusercontent.com/luasopia/data/master/png/star.png',
     ['birdfly.png'] = 'https://raw.githubusercontent.com/luasopia/data/master/png/birdfly.png',
     ['girlrun.png'] = 'https://raw.githubusercontent.com/luasopia/data/master/png/girlrun.png',
+    ['smoke.png'] = 'https://raw.githubusercontent.com/luasopia/data/master/png/smoke.png',
+    ['pipe.png'] = 'https://raw.githubusercontent.com/luasopia/data/master/png/pipe.png',
+    ['windbar.png'] = 'https://raw.githubusercontent.com/luasopia/data/master/png/windbar.png',
+    ['windblade.png'] = 'https://raw.githubusercontent.com/luasopia/data/master/png/windblade.png',
+    ['singleblade.png'] = 'https://raw.githubusercontent.com/luasopia/data/master/png/singleblade.png',
     
     ['bounce.wav'] = 'https://raw.githubusercontent.com/luasopia/data/master/wav/bounce.wav',
     ['pong.wav'] = 'https://raw.githubusercontent.com/luasopia/data/master/wav/pong.wav',
     ['up.wav'] = 'https://raw.githubusercontent.com/luasopia/data/master/wav/up.wav',
     ['warn.wav'] = 'https://raw.githubusercontent.com/luasopia/data/master/wav/warn.wav',
     ['zet.wav'] = 'https://raw.githubusercontent.com/luasopia/data/master/wav/zet.wav',
+    ['clear.wav'] = 'https://raw.githubusercontent.com/luasopia/data/master/wav/clear.wav',
 }
 
 --------------------------------------------------------------------------------
